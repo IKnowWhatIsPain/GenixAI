@@ -695,3 +695,34 @@
                 <div class="capability-card">
                     <div class="capability-icon">
                         <i class=
+<!-- Yaha tumhara page khatam hota hai -->
+
+   <script>
+       // "Start Building Free" button
+       document.querySelector('.btn-primary.btn-lg').addEventListener('click', function() {
+           alert("🚀 Let's start building your AI project!");
+       });
+
+       // "Watch Demo" button
+       document.querySelector('.btn-outline.btn-lg').addEventListener('click', function() {
+           alert("🎥 Demo coming soon!");
+       });
+
+       // Smooth scroll for navbar
+       document.querySelectorAll('nav a').forEach(anchor => {
+           anchor.addEventListener('click', function(e) {
+               e.preventDefault();
+               const target = document.querySelector(this.getAttribute('href'));
+               if (target) {
+                   window.scrollTo({
+                       top: target.offsetTop - 80,
+                       behavior: 'smooth'
+                   });
+               }
+           });
+       });
+   </script>
+
+</body>
+                        </html>
+   
