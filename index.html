@@ -110,7 +110,7 @@
     'Authorization': `Bearer ${process.env.HUGGINGFACE_TOKEN}`,
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({ inputs: message })
+  body: JSON.stringify({ inputs: updated API key connection })
 });
         const data = await response.json();
         document.querySelector('.bot:last-child').textContent =
@@ -130,4 +130,5 @@
   </script>
 </body>
 </html>
+
 
