@@ -726,3 +726,178 @@
 </body>
                         </html>
    
+<!-- ChatGPT Style AI Chatbot -->
+<div id="chat-container">
+  <div id="chat-box"></div>
+  <div id="chat-input-area">
+    <input type="text" id="user-input" placeholder="Ask me anything..." />
+    <button id="send-btn">Send</button>
+  </div>
+</div>
+
+<script>
+const chatBox = document.getElementById("chat-box");
+const userInput = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
+
+async function getAIResponse(message) {
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer demo-groq-free-key" // (no need to pay)
+    },
+    body: JSON.stringify({
+      model: "mixtral-8x7b",
+      messages: [{ role: "user", content: message }]
+    })
+  });
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || "Sorry, I couldn’t reply 😅";
+}
+
+function appendMessage(sender, text) {
+  const div = document.createElement("div");
+  div.className = sender;
+  div.textContent = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+sendBtn.onclick = async () => {
+  const message = userInput.value.trim();
+  if (!message) return;
+  appendMessage("user", "🧑: " + message);
+  userInput.value = "";
+  appendMessage("bot", "🤖 Thinking...");
+  const reply = await getAIResponse(message);
+  chatBox.lastChild.textContent = "🤖: " + reply;
+};
+</script>
+
+<style>
+#chat-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  background: #111;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+}
+#chat-box {
+  height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #222;
+  border-radius: 8px;
+}
+#chat-input-area {
+  display: flex;
+  margin-top: 10px;
+}
+#user-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+}
+#send-btn {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.user, .bot { margin: 8px 0; }
+</style><!-- ChatGPT Style AI Chatbot -->
+<div id="chat-container">
+  <div id="chat-box"></div>
+  <div id="chat-input-area">
+    <input type="text" id="user-input" placeholder="Ask me anything..." />
+    <button id="send-btn">Send</button>
+  </div>
+</div>
+
+<script>
+const chatBox = document.getElementById("chat-box");
+const userInput = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
+
+async function getAIResponse(message) {
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer demo-groq-free-key" // (no need to pay)
+    },
+    body: JSON.stringify({
+      model: "mixtral-8x7b",
+      messages: [{ role: "user", content: message }]
+    })
+  });
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || "Sorry, I couldn’t reply 😅";
+}
+
+function appendMessage(sender, text) {
+  const div = document.createElement("div");
+  div.className = sender;
+  div.textContent = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+sendBtn.onclick = async () => {
+  const message = userInput.value.trim();
+  if (!message) return;
+  appendMessage("user", "🧑: " + message);
+  userInput.value = "";
+  appendMessage("bot", "🤖 Thinking...");
+  const reply = await getAIResponse(message);
+  chatBox.lastChild.textContent = "🤖: " + reply;
+};
+</script>
+
+<style>
+#chat-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  background: #111;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+}
+#chat-box {
+  height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #222;
+  border-radius: 8px;
+}
+#chat-input-area {
+  display: flex;
+  margin-top: 10px;
+}
+#user-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+}
+#send-btn {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.user, .bot { margin: 8px 0; }
+</style>
