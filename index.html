@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Genix AI - Smart Chat</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genix AI</title>
   <style>
     body {
-      background: #0f0f1a;
+      background-color: #0e0e12;
       color: white;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -17,86 +17,51 @@
       margin: 0;
     }
     h1 {
-      color: #8a6cff;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-    .chat-box {
+    .chatbox {
       width: 90%;
-      max-width: 600px;
-      background: #1a1a2e;
-      padding: 20px;
+      max-width: 400px;
+      background: #1a1a22;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(138, 108, 255, 0.3);
+      padding: 1rem;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
     }
-    textarea {
-      width: 100%;
-      height: 100px;
-      background: #0f0f1a;
-      color: white;
-      border: 1px solid #8a6cff;
-      border-radius: 10px;
+    #messages {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #333;
       padding: 10px;
-      resize: none;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 5px;
+      font-size: 1rem;
     }
     button {
-      background: #8a6cff;
+      background: #7c3aed;
       color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
       cursor: pointer;
-      margin-top: 10px;
     }
-    .response {
-      margin-top: 20px;
-      background: #13132b;
-      padding: 15px;
-      border-radius: 10px;
-      white-space: pre-wrap;
+    button:hover {
+      background: #9d4edd;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Genix AI Chat</h1>
-  <div class="chat-box">
-    <textarea id="prompt" placeholder="Ask anything..."></textarea>
-    <button onclick="askAI()">Send</button>
-    <div class="response" id="response">💬 AI response will appear here...</div>
+  <h1>🤖 Genix AI Chat</h1>
+  <div class="chatbox">
+    <div id="messages"></div>
+    <input type="text" id="userInput" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
   </div>
 
-  <script>
-    async function askAI() {
-      const prompt = document.getElementById("prompt").value;
-      const resBox = document.getElementById("response");
-      resBox.innerText = "⏳ Thinking...";
-
-      try {
-        const res = await fetch("https://api-inference.huggingface.co/models/google/gemma-2b", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ inputs: prompt })
-        });
-
-        const data = await res.json();
-        resBox.innerText = data[0]?.generated_text || "⚠️ No response from AI.";
-      } catch (e) {
-        resBox.innerText = "❌ Error connecting to AI model.";
-      }
-    }
-  </script>
-<section id="chat" style="padding: 80px 0; text-align:center;">
-  <h2>💬 Talk with Genix AI</h2>
-
-  <div id="chat-box" style="width:80%;max-width:600px;margin:20px auto;padding:20px;background:#111827;border-radius:12px;height:400px;overflow-y:auto;text-align:left;"></div>
-
-  <form id="chat-form" style="margin-top:20px;">
-    <input id="user-input" type="text" placeholder="Type your question..." style="padding:10px;width:70%;border-radius:8px;border:none;">
-    <button type="submit" style="padding:10px 20px;border:none;border-radius:8px;background:#6366f1;color:white;font-weight:bold;">Send</button>
-  </form>
-</section>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
